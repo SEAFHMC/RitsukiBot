@@ -2,7 +2,7 @@ from .function import check_update, get_update, strip_deco, get_img_url
 import nonebot
 from nonebot import MessageSegment
 from time import sleep
-from data_resource import rss_list, group_list
+from .data_resource import rss_list, group_list
 
 
 @nonebot.scheduler.scheduled_job('interval', minutes=10)
