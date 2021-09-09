@@ -20,7 +20,7 @@ async def _():
             elif i == 'epicgames/freegames':
                 summary = await strip_deco(jsons_dict['summary'])
                 img_url = await get_img_url(jsons_dict['summary'])
-                result = 'Epic商城有新游戏可领取：\n'+jsons_dict['title']+'\n'+summary+'\n'+MessageSegment.image(img_url)+jsons_dict['id']
+                result = 'Epic商城有新游戏可领取：\n'+jsons_dict['title']+'\n'+summary+'\n'+MessageSegment.image(img_url)
             elif i == 'bilibili/user/dynamic/404145357':
                 img_url = await get_img_url(jsons_dict['summary'])
                 summary = await strip_deco(jsons_dict['summary'])
