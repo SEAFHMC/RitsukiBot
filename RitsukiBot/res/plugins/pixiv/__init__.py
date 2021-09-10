@@ -1,5 +1,5 @@
 from nonebot import on_command, CommandSession, MessageSegment
-import json
+import ujson
 import requests
 __plugin_name__ = 'pixiv'
 __plugin_usage__ = r"""1、获取Pixiv榜单并返回图片
@@ -25,8 +25,8 @@ async def pixivrank(session: CommandSession):
     rank = session.current_arg_text
     url = "https://api.loli.st/pixiv/?mode="+rank
     r = requests.get(url=url, verify=False)
-    jsons = json.loads(r.text)
-    id = jsons["illust_id"]
+    ujsons = ujson.loads(r.text)
+    id = ujsons["illust_id"]
     imgurl_rank = "https://pixiv.cat/"+id+".png"
     img_r = requests.get(imgurl_rank)
     if int(img_r.status_code) == 404:
