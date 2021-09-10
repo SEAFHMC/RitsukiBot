@@ -1,5 +1,5 @@
 import feedparser
-import ujson
+import json
 
 
 async def get_img_url(str):
@@ -26,8 +26,8 @@ async def check_update(rss_id):
     with open('./res/plugins/rss/'+rss_id.replace('/', '-')+'.json', 'r', encoding='UTF-8') as f:
         url = r'http://107.182.17.60:1200/'+rss_id
         parser = feedparser.parse(url)
-        ujsons = ujson.dumps(parser.entries[0], indent=2, ensure_ascii=False)
-        if ujsons == f.read():
+        jsons = json.dumps(parser.entries[0], indent=2, ensure_ascii=False)
+        if jsons == f.read():
             return False
         else:
             return True
@@ -37,6 +37,6 @@ async def get_update(rss_id):
     with open('./res/plugins/rss/'+rss_id.replace('/', '-')+'.json', 'w+', encoding='UTF-8') as f:
         url = r'http://107.182.17.60:1200/'+rss_id
         parser = feedparser.parse(url)
-        ujsons = ujson.dumps(parser.entries[0], indent=2, ensure_ascii=False)
-        f.write(ujsons)
-        return ujson.loads(ujsons)
+        jsons = json.dumps(parser.entries[0], indent=2, ensure_ascii=False)
+        f.write(jsons)
+        return json.loads(jsons)
