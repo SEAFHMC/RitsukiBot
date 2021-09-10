@@ -1,4 +1,4 @@
-import json
+import ujson
 import requests
 import openpyxl
 
@@ -6,10 +6,10 @@ import openpyxl
 async def get_water_lv(ShuiWei):
     url = "https://tianqiapi.com/api?version=v6&appid=93561677&appsecret=xTW8n2Al&cityid=101200201"
     r = requests.get(url)
-    jsons = json.loads(r.text)
+    ujsons = ujson.loads(r.text)
     wb = openpyxl.load_workbook("res/docs/water_lv_log.xlsx")
     sh0 = wb.worksheets[0]
-    sh0.cell(sh0.max_row+1, 1).value = jsons["update_time"]
+    sh0.cell(sh0.max_row+1, 1).value = ujsons["update_time"]
     sh0.cell(sh0.max_row, 2).value = ShuiWei
     yesterday_time = sh0.cell(sh0.max_row-1, 1).value[11:]
     yesterday_ShuiWei = round(float(sh0.cell(sh0.max_row-1, 2).value), 2)
@@ -21,6 +21,6 @@ async def get_water_lv(ShuiWei):
     else:
         flag = "无变化\n"
     wb.save("res/docs/water_lv_log.xlsx")
-    result = "测量时间："+jsons["update_time"]+"\n"+"目前水位："+ShuiWei+"m\n"+"较昨日"+yesterday_time+" 测量 "+str(yesterday_ShuiWei)+"m\n"+flag+"当前天气："+jsons["wea"]+"\n"+"风力："+jsons["win"]+jsons["win_speed"]
+    result = "测量时间："+ujsons["update_time"]+"\n"+"目前水位："+ShuiWei+"m\n"+"较昨日"+yesterday_time+" 测量 "+str(yesterday_ShuiWei)+"m\n"+flag+"当前天气："+ujsons["wea"]+"\n"+"风力："+ujsons["win"]+ujsons["win_speed"]
     wb.close()
     return result
