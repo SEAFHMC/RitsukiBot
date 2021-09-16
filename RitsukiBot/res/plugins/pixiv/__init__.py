@@ -5,7 +5,7 @@ __plugin_usage__ = r"""1、获取Pixiv榜单并返回图片
 用法：/pixivrank [key_word]
 当前支持的key_word有：
 daily, weekly, monthly,
-rookie,
+rookie,original,male,female
 可在key_word后附加_r18
 
 2、根据pid返回图片
