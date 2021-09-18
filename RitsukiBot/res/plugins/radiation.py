@@ -12,7 +12,7 @@ async def radiation(question):
             return choice(ujsons[choice(seg_list)])
 
 
-@on_command('radiation_chat', aliases=('二刺螈', '浓度', '高辐射'))
+@on_command('radiation_chat', aliases=('二刺螈', '浓度', '高辐射'), only_to_me=False)
 async def radiation_chat(session: CommandSession):
     question = session.get('question')
     result = await radiation(question)
