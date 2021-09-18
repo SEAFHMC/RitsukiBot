@@ -22,10 +22,16 @@ async def radiation_chat(session: CommandSession):
 @radiation_chat.args_parser
 async def _(session: CommandSession):
     stripped_arg = session.current_arg_text.strip()
+    if session.is_first_run:
+        if stripped_arg:
+            session.state['question'] = stripped_arg
+        return
+    if not stripped_arg:
+        session.pause('什么事呀？')
     session.state[session.current_key] = stripped_arg
 
 
-@on_natural_language(keywords={'文文'})
+@on_natural_language(keywords={'文文'}, only_to_me=False)
 async def _(session: NLPSession):
     stripped_msg = session.msg_text.strip()
-    return IntentCommand(90.0, 'radiation_chat', current_arg=stripped_msg or '')
+    return IntentCommand(90.0, 'radiation_chat', current_arg=stripped_msg)
