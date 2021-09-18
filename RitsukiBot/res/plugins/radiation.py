@@ -8,8 +8,9 @@ async def radiation(question):
     seg_list = jieba.lcut(question, cut_all=True)
     with open('./res/docs/data.json', 'r', encoding='UTF-8') as f:
         ujsons = ujson.loads(f.read())
-        if choice(seg_list) in ujsons.keys():
-            return choice(ujsons[choice(seg_list)])
+        init = choice(seg_list)
+        if init in ujsons.keys():
+            return choice(ujsons[init])
 
 
 @on_command('radiation_chat', aliases=('二刺螈', '浓度', '高辐射'), only_to_me=False)
