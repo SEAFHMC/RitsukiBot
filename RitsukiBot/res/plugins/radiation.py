@@ -2,6 +2,7 @@ import nonebot
 import jieba
 import ujson
 from random import choice
+jieba.load_userdict('./res/docs/dict.txt')
 bot = nonebot.get_bot()
 
 
