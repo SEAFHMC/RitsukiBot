@@ -26,5 +26,8 @@ async def radiation(question):
 async def chat(context):
     message = context['raw_message'].strip()
     group_id = context['group_id']
-    message = await radiation(message)
+    try:
+        message = await radiation(message)
+    except:
+        pass
     await bot.send_group_msg(group_id=group_id, message=message)
