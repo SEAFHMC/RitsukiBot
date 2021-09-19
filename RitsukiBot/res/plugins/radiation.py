@@ -1,38 +1,30 @@
-import ujson
+import nonebot
 import jieba
+import ujson
 from random import choice
-from nonebot import on_command, CommandSession, on_natural_language, NLPSession, IntentCommand
+bot = nonebot.get_bot()
 
 
 async def radiation(question):
     seg_list = jieba.lcut(question, cut_all=True)
-    with open('./res/docs/data.json', 'r', encoding='UTF-8') as f:
-        ujsons = ujson.loads(f.read())
-        init = choice(seg_list)
-        if init in ujsons.keys():
-            return choice(ujsons[init])
+    if seg_list[0] == '文文':
+        del seg_list[0]
+        with open('./res/docs/data.json', 'r', encoding='UTF-8') as f:
+            ujsons = ujson.loads(f.read())
+            init = []
+            for i in seg_list:
+                if i in ujsons.keys():
+                    init.append(i)
+            init = choice(init)
+            if init in ujsons.keys():
+                return choice(ujsons[init])
+    else:
+        pass
 
 
-@on_command('radiation_chat', aliases=('二刺螈', '浓度', '高辐射'), only_to_me=False)
-async def radiation_chat(session: CommandSession):
-    question = session.get('question')
-    result = await radiation(question)
-    await session.send(result)
-
-
-@radiation_chat.args_parser
-async def _(session: CommandSession):
-    stripped_arg = session.current_arg_text.strip()
-    if session.is_first_run:
-        if stripped_arg:
-            session.state['question'] = stripped_arg
-        return
-    if not stripped_arg:
-        session.pause('什么事呀？')
-    session.state[session.current_key] = stripped_arg
-
-
-@on_natural_language(keywords={'文文'}, only_to_me=False)
-async def _(session: NLPSession):
-    stripped_msg = session.msg_text.strip()
-    return IntentCommand(90.0, 'radiation_chat', current_arg=stripped_msg)
+@bot.on_message('group')
+async def chat(context):
+    message = context['raw_message'].strip()
+    group_id = context['group_id']
+    message = await radiation(message)
+    await bot.send_group_msg(group_id=group_id, message=message)
