@@ -16,3 +16,4 @@ pip install poetry
 - 应用更新(仅Admin有效)
 - 通过Bot运行服务器指令(没什么卵用
 - RSS订阅信息
+- 高浓度对话（够味），感谢[AnimeThesaurus](https://github.com/Kyomotoi/AnimeThesaurus)
