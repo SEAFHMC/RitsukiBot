@@ -8,7 +8,7 @@ bot = nonebot.get_bot()
 async def radiation(question):
     try:
         seg_list = jieba.lcut(question, cut_all=True)
-        if seg_list[0] == '文文':
+        if seg_list[0] == '文文' and '新闻' not in seg_list:
             del seg_list[0]
             with open('./res/docs/data.json', 'r', encoding='UTF-8') as f:
                 ujsons = ujson.loads(f.read())
