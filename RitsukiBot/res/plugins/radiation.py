@@ -6,19 +6,22 @@ bot = nonebot.get_bot()
 
 
 async def radiation(question):
-    seg_list = jieba.lcut(question, cut_all=True)
-    if seg_list[0] == '文文':
-        del seg_list[0]
-        with open('./res/docs/data.json', 'r', encoding='UTF-8') as f:
-            ujsons = ujson.loads(f.read())
-            init = []
-            for i in seg_list:
-                if i in ujsons.keys():
-                    init.append(i)
-            init = choice(init)
-            if init in ujsons.keys():
-                return choice(ujsons[init])
-    else:
+    try:
+        seg_list = jieba.lcut(question, cut_all=True)
+        if seg_list[0] == '文文':
+            del seg_list[0]
+            with open('./res/docs/data.json', 'r', encoding='UTF-8') as f:
+                ujsons = ujson.loads(f.read())
+                init = []
+                for i in seg_list:
+                    if i in ujsons.keys():
+                        init.append(i)
+                init = choice(init)
+                if init in ujsons.keys():
+                    return choice(ujsons[init])
+        else:
+            pass
+    except:
         pass
 
 
@@ -26,8 +29,5 @@ async def radiation(question):
 async def chat(context):
     message = context['raw_message'].strip()
     group_id = context['group_id']
-    try:
-        message = await radiation(message)
-    except:
-        pass
+    message = await radiation(message)
     await bot.send_group_msg(group_id=group_id, message=message)
