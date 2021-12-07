@@ -8,6 +8,9 @@ __plugin_usage__ = r"""根据tag获取涩图（图源yande.re）
 @on_command('yande', only_to_me=False)
 async def yande(session: CommandSession):
     tag = session.current_arg_text.strip()
-    url = await acurate_tag(tag)
-    result = MessageSegment.image(url)
+    parser_list = await acurate_tag(tag)
+    if parser_list[0] == 'ask':
+        result = parser_list[1]
+    else:
+        result = MessageSegment.image(parser_list[1])
     await session.send(result)
