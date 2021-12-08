@@ -1,6 +1,5 @@
 from nonebot import on_notice, NoticeSession
 import nonebot
-from .data_resources import white_list
 
 
 @on_notice('group_recall')
@@ -10,7 +9,7 @@ async def _(session: NoticeSession):
     group_id = session.ctx['group_id']
     user_id = session.ctx['user_id']
     operator_id = session.ctx['operator_id']
-    if (operator_id == user_id) and (not(int(operator_id) in white_list)):
+    if operator_id == user_id:
         member_info = await bot.get_group_member_info(group_id=group_id, user_id=user_id)
         nickname = member_info['nickname']
         recalled_msg_all = await bot.get_msg(message_id=message_id)
