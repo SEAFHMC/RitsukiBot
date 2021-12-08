@@ -4,6 +4,8 @@ import ujson
 from random import choice
 jieba.load_userdict('./res/docs/dict.txt')
 bot = nonebot.get_bot()
+with open('./res/docs/data.json', 'r', encoding='UTF-8') as f:
+    ujsons = ujson.loads(f.read())
 
 
 async def del_str(str, str_list):
@@ -18,15 +20,13 @@ async def radiation(question):
         seg_list = jieba.lcut(question, cut_all=True)
         if '文文' in seg_list and '新闻' not in seg_list:
             seg_list = await del_str('文文', seg_list)
-            with open('./res/docs/data.json', 'r', encoding='UTF-8') as f:
-                ujsons = ujson.loads(f.read())
-                init = []
-                for i in seg_list:
-                    if i in ujsons.keys():
-                        init.append(i)
-                init = choice(init)
-                if init in ujsons.keys():
-                    return choice(ujsons[init])
+            init = []
+            for i in seg_list:
+                if i in ujsons.keys():
+                    init.append(i)
+            init = choice(init)
+            if init in ujsons.keys():
+                return choice(ujsons[init])
         else:
             pass
     except:
