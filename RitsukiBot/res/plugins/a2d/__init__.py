@@ -7,7 +7,7 @@ __plugin_usage__ = r"""ascii2d搜图
 
 @on_command('a2d', only_to_me=False)
 async def a2d_search(session: CommandSession):
-    CQCode = session.get('CQCode', prompt='请发送一张图片')
+    CQCode = session.get('CQCode', prompt='图来')
     search_result = await a2d(CQCode)
     result_color = (
         "色合搜索结果: " + '\n' +
