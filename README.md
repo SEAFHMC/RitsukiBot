@@ -17,3 +17,4 @@ pip install poetry
 - 通过Bot运行服务器指令(没什么卵用
 - RSS订阅信息
 - 高浓度对话（够味），感谢[AnimeThesaurus](https://github.com/Kyomotoi/AnimeThesaurus)
+- ascii2d搜索， 感谢[PicImageSearch](https://github.com/kitUIN/PicImageSearch)
