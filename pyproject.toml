@@ -12,7 +12,6 @@ nonebot = {extras = ["scheduler"], version = "^1.8.4"}
 feedparser = "^6.0.8"
 ujson = "^4.1.0"
 jieba = "^0.42.1"
-beautifulsoup4 = "^4.10.0"
 lxml = "^4.6.4"
 
 [tool.poetry.dev-dependencies]
