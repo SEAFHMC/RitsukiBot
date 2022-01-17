@@ -14,7 +14,6 @@ ujson = "^4.1.0"
 jieba = "^0.42.1"
 beautifulsoup4 = "^4.10.0"
 lxml = "^4.6.4"
-PicImageSearch = "^2.2.3"
 
 [tool.poetry.dev-dependencies]
 
