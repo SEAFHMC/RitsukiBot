@@ -2,7 +2,7 @@ from nonebot import on_command, CommandSession, MessageSegment
 from .function import a2d
 __plugin_name__ = 'a2d'
 __plugin_usage__ = r"""ascii2d搜图
-用法：/yande [tag]"""
+用法：/a2d [image]"""
 
 
 @on_command('a2d', only_to_me=False)
