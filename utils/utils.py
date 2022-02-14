@@ -1,6 +1,6 @@
-import ujson
+import ujson as json
+import httpx
 from typing import List
-from nonebot.adapters.onebot.v11 import MessageSegment
 
 
 def get_message_img(data: str) -> List[str]:
@@ -12,7 +12,7 @@ def get_message_img(data: str) -> List[str]:
     """
     try:
         img_list = []
-        data = ujson.loads(data)
+        data = json.loads(data)
         for msg in data["message"]:
             if msg["type"] == "image":
                 img_list.append(msg["data"]["url"])
@@ -21,13 +21,7 @@ def get_message_img(data: str) -> List[str]:
         return []
 
 
-def make_node(msg):
-    node = {
-        'type': 'node',
-        'data': {
-            'uin': 2854196306,
-            'name': '小冰',
-            'content': msg
-            }
-        }
-    return node
+async def httpx_request(url: str) -> str:
+    async with httpx.AsyncClient() as client:
+        res = await client.get(url)
+    return res.text
