@@ -1,18 +1,13 @@
-import requests
 import ujson as json
 from nonebot import logger
 from nonebot.adapters.onebot.v11 import MessageSegment
 from datetime import datetime
-import os
 from os.path import dirname
+from utils.utils import httpx_request
 
 # 首次运行，创建目录和文件
 url = 'https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=zh-CN&country=CN&allowCountries=CN'
 path = dirname(__file__)
-if not os.path.exists(path+"/epic.json"):
-    logger.info('正在创建epic.json')
-    with open(path+'/epic.json', 'w+', encoding='UTF-8') as f:
-        f.write(requests.get(url).text)
 
 
 class epicgames():
@@ -25,7 +20,7 @@ class epicgames():
 
 async def get_game_list_online():
     try:
-        jsons = requests.get(url).text
+        jsons = await httpx_request(url)
         jsons = json.loads(jsons)
         game_list = jsons['data']['Catalog']['searchStore']['elements']
         game_list = list(filter(lambda x: x['promotions'], game_list))
@@ -54,7 +49,8 @@ async def new_promotion():
     if local != online:
         logger.info('Epic白嫖发现更新')
         with open(path+'/epic.json', 'w', encoding='UTF-8') as f:
-            f.write(requests.get(url).text)
+            jsons = await httpx_request(url)
+            f.write(jsons)
         return True
     else:
         return False
