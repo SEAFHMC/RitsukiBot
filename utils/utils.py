@@ -31,13 +31,15 @@ async def httpx_request(url: str) -> Optional[str]:
             return None
 
 
-def make_node(uin: int, name: str, content) -> MessageSegment:
-    node = MessageSegment('node', {
+def make_node(uin: int, name: str, content) -> dict:
+    node = {
+        'type': 'node',
+        'data': {
             'uin': uin,
             'name': name,
             'content': content
         }
-    )
+    }
     return node
 
 
