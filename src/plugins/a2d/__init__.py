@@ -33,7 +33,7 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State = State()):
         'author: ' + search_result[0]['authors'] + '\n' +
         MessageSegment.image(search_result[0]['thumbnail']) + '\n' +
         'url: ' + search_result[0]['url'])
-    await a2d.finish(result_color)
+    await a2d.send(result_color)
 
     result_bovm = (
         "特徽搜索结果: " + '\n' +
