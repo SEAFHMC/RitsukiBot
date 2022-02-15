@@ -1,6 +1,6 @@
 import ujson as json
 import httpx
-from typing import List
+from typing import List, Optional
 
 
 def get_message_img(data: str) -> List[str]:
@@ -21,7 +21,10 @@ def get_message_img(data: str) -> List[str]:
         return []
 
 
-async def httpx_request(url: str) -> str:
+async def httpx_request(url: str) -> Optional[str]:
     async with httpx.AsyncClient() as client:
-        res = await client.get(url)
-    return res.text
+        try:
+            res = await client.get(url)
+            return res.text
+        except Exception:
+            return None
