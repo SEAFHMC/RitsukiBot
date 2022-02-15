@@ -31,7 +31,7 @@ async def httpx_request(url: str) -> Optional[str]:
             return None
 
 
-def make_node(uin, name, content):
+def make_node(uin: int, name: str, content) -> MessageSegment:
     node = MessageSegment('node', {
             'uin': uin,
             'name': name,
@@ -39,3 +39,12 @@ def make_node(uin, name, content):
         }
     )
     return node
+
+
+def get_group_id(data: str) -> Optional[int]:
+    try:
+        jsons = json.loads(data)
+        group_id = jsons['group_id']
+        return group_id
+    except Exception:
+        return None
