@@ -1,6 +1,7 @@
 import ujson as json
 import httpx
 from typing import List, Optional
+from nonebot.adapters.onebot.v11 import MessageSegment
 
 
 def get_message_img(data: str) -> List[str]:
@@ -28,3 +29,13 @@ async def httpx_request(url: str) -> Optional[str]:
             return res.text
         except Exception:
             return None
+
+
+def make_node(uin, name, content):
+    node = MessageSegment('node', {
+            'uin': uin,
+            'name': name,
+            'content': content
+        }
+    )
+    return node
