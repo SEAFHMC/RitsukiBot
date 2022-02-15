@@ -1,47 +1,50 @@
+import ujson as json
+import httpx
+from typing import List, Optional
 from nonebot.adapters.onebot.v11 import MessageSegment
-from nonebot.adapters import Bot, Event
-from nonebot.typing import T_State
-from typing import List
-from nonebot.params import State
-from nonebot import on_command
-from utils.utils import get_message_img, get_group_id, make_node
-from .data_resource import a2d_func
-
-__plugin_name__ = 'a2d'
-__plugin_usage__ = r"""ascii2d搜图
-用法：/a2d [image]"""
-
-a2d = on_command("a2d")
 
 
-@a2d.handle()
-async def handle_first_receive(bot: Bot, event: Event, state: T_State = State()):
-    imgs: List = get_message_img(event.json())
-    if not imgs:
-        await a2d.reject('图来')
-    else:
-        state["imgs"] = imgs
+def get_message_img(data: str) -> List[str]:
+    """
+    说明：
+        获取消息中所有的 图片 的链接
+    参数：
+        :param data: event.json()
+    """
+    try:
+        img_list = []
+        data = json.loads(data)
+        for msg in data["message"]:
+            if msg["type"] == "image":
+                img_list.append(msg["data"]["url"])
+        return img_list
+    except KeyError:
+        return []
 
 
-@a2d.got("imgs", prompt='图来')
-async def handle_songNum(bot: Bot, event: Event, state: T_State = State()):
-    imgs = state['imgs']
-    uin = bot.self_id
-    name = 'Bot'
-    group_id = get_group_id(event.json())
-    search_result = await a2d_func(imgs)
-    result_color = (
-        "色合搜索结果: " + '\n' +
-        'title: ' + search_result[0]['title'] + '\n' +
-        'author: ' + search_result[0]['authors'] + '\n' +
-        MessageSegment.image(search_result[0]['thumbnail']) + '\n' +
-        'url: ' + search_result[0]['url'])
+async def httpx_request(url: str) -> Optional[str]:
+    async with httpx.AsyncClient() as client:
+        try:
+            res = await client.get(url)
+            return res.text
+        except Exception:
+            return None
 
-    result_bovm = (
-        "特徽搜索结果: " + '\n' +
-        'title: ' + search_result[1]['title'] + '\n' +
-        'author: ' + search_result[1]['authors'] + '\n' +
-        MessageSegment.image(search_result[1]['thumbnail']) + '\n' +
-        'url: ' + search_result[1]['url'])
 
-    await bot.send_group_forward_msg(group_id=group_id, messages=[make_node(uin, name, result_color), make_node(uin, name, result_bovm)])
+def make_node(uin: int, name: str, content) -> MessageSegment:
+    node = MessageSegment('node', {
+            'uin': uin,
+            'name': name,
+            'content': content
+        }
+    )
+    return node
+
+
+def get_group_id(data: str) -> Optional[int]:
+    try:
+        jsons = json.loads(data)
+        group_id = jsons['group_id']
+        return group_id
+    except Exception:
+        return None
