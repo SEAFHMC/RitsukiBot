@@ -4,7 +4,7 @@ from nonebot.typing import T_State
 from typing import List
 from nonebot.params import State
 from nonebot import on_command
-from utils.utils import get_message_img
+from utils.utils import get_message_img, get_group_id, make_node
 from .data_resource import a2d_func
 
 __plugin_name__ = 'a2d'
@@ -26,6 +26,9 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State = State())
 @a2d.got("imgs", prompt='图来')
 async def handle_songNum(bot: Bot, event: Event, state: T_State = State()):
     imgs = state['imgs']
+    uin = bot.self_id
+    name = 'Bot'
+    group_id = get_group_id(event.json())
     search_result = await a2d_func(imgs)
     result_color = (
         "色合搜索结果: " + '\n' +
@@ -33,7 +36,6 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State = State()):
         'author: ' + search_result[0]['authors'] + '\n' +
         MessageSegment.image(search_result[0]['thumbnail']) + '\n' +
         'url: ' + search_result[0]['url'])
-    await a2d.send(result_color)
 
     result_bovm = (
         "特徽搜索结果: " + '\n' +
@@ -41,4 +43,5 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State = State()):
         'author: ' + search_result[1]['authors'] + '\n' +
         MessageSegment.image(search_result[1]['thumbnail']) + '\n' +
         'url: ' + search_result[1]['url'])
-    await a2d.finish(result_bovm)
+
+    await bot.send_group_forward_msg(group_id=group_id, messages=[make_node(uin, name, result_color), make_node(uin, name, result_bovm)])
