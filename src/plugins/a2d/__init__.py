@@ -11,7 +11,7 @@ __plugin_name__ = 'a2d'
 __plugin_usage__ = r"""ascii2d搜图
 用法：/a2d [image]"""
 
-a2d = on_command("a2d")
+a2d = on_command("a2d", priority=5)
 
 
 @a2d.handle()
