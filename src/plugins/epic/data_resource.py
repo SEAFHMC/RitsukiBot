@@ -46,7 +46,7 @@ async def get_game_list_local():
 async def new_promotion():
     local = await get_game_list_local()
     online = await get_game_list_online()
-    if local != online:
+    if local[0] != online[0]:
         logger.info('Epic白嫖发现更新')
         with open(path+'/epic.json', 'w', encoding='UTF-8') as f:
             jsons = await httpx_request(url)
@@ -66,5 +66,5 @@ async def make_msg():
         present.description + '\n' +\
         '截止时间：' + datetime.fromisoformat(present_endDate).strftime("%Y.%m.%d %H:%M")
     if epicgames(game_list[1]):
-        msg += f'\n下周可白嫖：{epicgames(game_list[1]).title}'
+        msg += f'\n下次可白嫖：{epicgames(game_list[1]).title}'
     return msg
