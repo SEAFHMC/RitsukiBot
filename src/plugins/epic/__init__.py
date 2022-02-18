@@ -3,10 +3,12 @@ from nonebot.adapters.onebot.v11 import Bot, MessageEvent
 from .data_resource import make_msg, new_promotion, path, url
 import os
 from utils.utils import httpx_request
+from .config import Config
 
 driver = get_driver()
-groups = get_driver().config.epic_subscribe_group
-users = get_driver().config.epic_subscribe_user
+cfg = Config.parse_obj(get_driver().config)
+groups = cfg.epic_subscribe_group
+users = cfg.epic_subscribe_user
 
 epic = on_command("epic", priority=6)
 
@@ -31,6 +33,7 @@ scheduler = require("nonebot_plugin_apscheduler").scheduler
 # 每两个小时检查一次更新
 @scheduler.scheduled_job("cron", hour="*/2", id="Every_TwoHours")
 async def check_update():
+    logger.info('checking update')
     if await new_promotion():
         bot = get_bot()
         res = await make_msg()
