@@ -1,4 +1,3 @@
-from email import message
 from nonebot.adapters.onebot.v11 import MessageSegment, GroupMessageEvent
 from nonebot.adapters import Bot, Event, Message
 from nonebot.params import CommandArg
