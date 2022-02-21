@@ -3,7 +3,7 @@ from nonebot import logger
 from nonebot.adapters.onebot.v11 import MessageSegment
 from datetime import datetime
 from os.path import dirname
-from utils.utils import httpx_request
+from utils.utils import httpx_get
 from typing import List
 
 # 首次运行，创建目录和文件
@@ -21,7 +21,7 @@ class epicgames():
 
 async def get_game_list_online() -> List:
     try:
-        jsons = await httpx_request(url)
+        jsons = await httpx_get(url)
         jsons = json.loads(jsons)
         game_list = jsons['data']['Catalog']['searchStore']['elements']
         game_list = list(filter(lambda x: x['promotions'], game_list))
@@ -56,7 +56,7 @@ async def new_promotion():
     if local[0].title != online[0].title:
         logger.info('Epic白嫖发现更新')
         with open(path+'/epic.json', 'w', encoding='UTF-8') as f:
-            jsons = await httpx_request(url)
+            jsons = await httpx_get(url)
             f.write(jsons)
         return True
     else:
