@@ -2,7 +2,7 @@ from nonebot import on_command, get_driver, require, get_bot, logger
 from nonebot.adapters.onebot.v11 import Bot, MessageEvent
 from .data_resource import make_msg, new_promotion, path, url
 import os
-from utils.utils import httpx_request
+from utils.utils import httpx_get
 from .config import Config
 
 driver = get_driver()
@@ -17,7 +17,7 @@ epic = on_command("epic", priority=6)
 async def first_run():
     if not os.path.exists(path+"/epic.json"):
         logger.info('正在创建epic.json')
-        content = await httpx_request(url)
+        content = await httpx_get(url)
         with open(path+'/epic.json', 'w+', encoding='UTF-8') as f:
             f.write(content)
 
