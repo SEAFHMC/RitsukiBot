@@ -1,7 +1,6 @@
 import ujson as json
 import httpx
 from typing import List, Optional
-from nonebot.adapters.onebot.v11 import MessageSegment
 
 
 def get_message_img(data: str) -> List[str]:
@@ -22,7 +21,7 @@ def get_message_img(data: str) -> List[str]:
         return []
 
 
-async def httpx_request(url: str) -> Optional[str]:
+async def httpx_get(url: str) -> Optional[str]:
     async with httpx.AsyncClient() as client:
         try:
             res = await client.get(url)
