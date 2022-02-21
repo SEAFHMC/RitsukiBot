@@ -24,7 +24,7 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State = State())
 
 
 @a2d.got("imgs", prompt='图来')
-async def handle_songNum(bot: Bot, event: Event, state: T_State = State()):
+async def handle_epic(bot: Bot, event: Event, state: T_State = State()):
     imgs = state['imgs']
     search_result = await a2d_func(imgs)
     result_color = (
