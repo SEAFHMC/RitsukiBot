@@ -3,7 +3,7 @@
 兴趣使然写的Bot，可能含有多余的代码(或者Bug)。欢迎指正</br></br>
 会慢慢加功能(咕咕咕)
 <p align="center">
-  <a href="https://ishkong.github.io/go-cqhttp-docs/">
+  <a href="https://s2.loli.net/2022/02/23/Jb2ujGRMfy7AChI.jpg">
     <img src="https://s2.loli.net/2022/02/23/Jb2ujGRMfy7AChI.jpg">
   </a>
 </p>
