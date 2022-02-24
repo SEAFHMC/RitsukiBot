@@ -4,6 +4,7 @@ from .data_resource import make_msg, new_promotion, path, url
 import os
 from utils.utils import httpx_get
 from .config import Config
+import asyncio
 
 driver = get_driver()
 cfg = Config.parse_obj(get_driver().config)
@@ -39,5 +40,7 @@ async def check_update():
         res = await make_msg()
         for group in groups:
             await bot.send_group_msg(group_id=group, message=res)
+            await asyncio.sleep(2)
         for user in users:
             await bot.send_private_msg(user_id=user, message=res)
+            await asyncio.sleep(2)
