@@ -55,6 +55,9 @@ async def make_msg(bili_uid: str) -> Message:
     raw_summary = data.summary
     summary = re.sub(r'<.*?>', '', raw_summary)
     raw_detail = str(data.summary_detail)
-    imgs = re.findall(r'(https?://[^\s]+g)', raw_detail)
-    message = summary + MessageSegment.image(imgs[0])
+    try:
+        imgs = re.findall(r'(https?://[^\s]+g)', raw_detail)
+        message = summary + MessageSegment.image(imgs[0])
+    except Exception:
+        message = summary
     return message
