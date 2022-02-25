@@ -87,7 +87,7 @@ async def handle_biliunsub(bot: Bot, event: Event, state: T_State = State()):
 scheduler = require("nonebot_plugin_apscheduler").scheduler
 
 
-@scheduler.scheduled_job("cron", hour="*", id="Every_Hour")
+@scheduler.scheduled_job("cron", minute="*/30", id="Every_Half_Hour")
 async def check_update():
     logger.info('chekcing BiliDynmic update')
     with open(path+'/subscribe_data.json', 'r', encoding='UTF-8') as f:
