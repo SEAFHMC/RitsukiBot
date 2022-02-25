@@ -32,7 +32,7 @@ scheduler = require("nonebot_plugin_apscheduler").scheduler
 
 
 # 每天8点检查更新
-@scheduler.scheduled_job("cron", hour="8", id="Every_8oclock")
+@scheduler.scheduled_job("cron", hour="*/8", id="Every_8Hours")
 async def check_update():
     logger.info('checking epic_free update')
     if await new_promotion():
