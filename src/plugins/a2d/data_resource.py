@@ -1,4 +1,5 @@
 from PicImageSearch import NetWork, AsyncAscii2D
+import asyncio
 
 
 async def a2d_func(imgs):
@@ -21,3 +22,6 @@ async def a2d_func(imgs):
         'url': res.raw[1].url}
 
     return [result_color, result_bovm]
+
+# res = asyncio.run(a2d_func(['https://s2.loli.net/2022/02/23/Jb2ujGRMfy7AChI.jpg']))
+# print(res)
