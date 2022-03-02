@@ -1,5 +1,5 @@
 from PicImageSearch import NetWork, AsyncAscii2D
-import asyncio
+# import asyncio
 
 
 async def a2d_func(imgs):
