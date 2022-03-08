@@ -62,7 +62,7 @@ async def first_receive_unsub(bot: Bot, event: Event, state: T_State = State(), 
         state['bili_uid'] = bili_uid
 
 
-@biliunsub.got("bili_uid", prompt='请输入要订阅up主的uid')
+@biliunsub.got("bili_uid", prompt='请输入要取消订阅up主的uid')
 async def handle_biliunsub(bot: Bot, event: Event, state: T_State = State()):
     bili_uid = state['bili_uid']
     if isinstance(event, GroupMessageEvent):
