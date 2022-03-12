@@ -16,7 +16,7 @@ async def GetJson():
         global data
         data = json.loads(f.read())
 
-radiation = on_message(rule=to_me())
+radiation = on_message(rule=to_me(), priority=99)
 
 
 @radiation.handle()
