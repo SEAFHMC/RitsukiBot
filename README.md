@@ -1,4 +1,8 @@
-# RCNB! 
+<p align="center">
+  <img src="https://img.shields.io/static/v1?label=State-of-the-art&message=Shitcode&color=7B5804">
+</br>烂代码警告
+</p>
+
 ## RitsukiBot：基于Nonebot的自用QQbot
 兴趣使然写的Bot，可能含有多余的代码(或者Bug)。欢迎指正</br></br>
 会慢慢加功能(咕咕咕)
