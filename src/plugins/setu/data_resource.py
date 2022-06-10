@@ -2,6 +2,7 @@ import asyncio
 import nonebot
 from nonebot import get_driver
 from .config import Config
+
 cfg = Config.parse_obj(get_driver().config)
 
 

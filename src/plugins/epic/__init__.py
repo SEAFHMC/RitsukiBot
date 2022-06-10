@@ -16,10 +16,10 @@ epic = on_command("epic", priority=6)
 
 @driver.on_startup
 async def first_run():
-    if not os.path.exists(path+"/epic.json"):
-        logger.info('正在创建epic.json')
+    if not os.path.exists(path + "/epic.json"):
+        logger.info("正在创建epic.json")
         content = await httpx_get(url)
-        with open(path+'/epic.json', 'w+', encoding='UTF-8') as f:
+        with open(path + "/epic.json", "w+", encoding="UTF-8") as f:
             f.write(content)
 
 
@@ -28,13 +28,14 @@ async def _(bot: Bot, event: MessageEvent):
     res = await make_msg()
     await epic.finish(res)
 
+
 scheduler = require("nonebot_plugin_apscheduler").scheduler
 
 
 # 每天8点检查更新
 @scheduler.scheduled_job("cron", hour="*/8", id="Every_8Hours")
 async def check_update():
-    logger.info('checking epic_free update')
+    logger.info("checking epic_free update")
     if await new_promotion():
         bot = get_bot()
         res = await make_msg()

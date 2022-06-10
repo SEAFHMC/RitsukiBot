@@ -31,21 +31,14 @@ async def httpx_get(url: str) -> Optional[str]:
 
 
 def make_node(uin: int, name: str, content) -> dict:
-    node = {
-        'type': 'node',
-        'data': {
-            'uin': uin,
-            'name': name,
-            'content': content
-        }
-    }
+    node = {"type": "node", "data": {"uin": uin, "name": name, "content": content}}
     return node
 
 
 def get_group_id(data: str) -> Optional[int]:
     try:
         jsons = json.loads(data)
-        group_id = jsons['group_id']
+        group_id = jsons["group_id"]
         return group_id
     except Exception:
         return None

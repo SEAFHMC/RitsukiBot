@@ -15,35 +15,41 @@ konachan = on_command("konachan", priority=10)
 
 @yande.handle()
 async def yande_handle(bot: Bot, event: Event, args: Message = CommandArg()):
-    url = 'https://yande.re/post.json?tags='+str(args).strip()
+    url = "https://yande.re/post.json?tags=" + str(args).strip()
     img_list = json.loads(await httpx_get(url))
-    img_url = choice(img_list)['file_url']
+    img_url = choice(img_list)["file_url"]
     if isinstance(event, GroupMessageEvent):
-        res = await bot.send_group_msg(group_id=event.group_id, message=MessageSegment.image(img_url))
-        await msg_recall(res['message_id'])
+        res = await bot.send_group_msg(
+            group_id=event.group_id, message=MessageSegment.image(img_url)
+        )
+        await msg_recall(res["message_id"])
     else:
         await yande.finish(MessageSegment.image(img_url))
 
 
 @danbooru.handle()
 async def danbooru_handle(bot: Bot, event: Event, args: Message = CommandArg()):
-    url = 'https://danbooru.donmai.us/posts.json?tags='+str(args).strip()
+    url = "https://danbooru.donmai.us/posts.json?tags=" + str(args).strip()
     img_list = json.loads(await httpx_get(url))
-    img_url = choice(img_list)['file_url']
+    img_url = choice(img_list)["file_url"]
     if isinstance(event, GroupMessageEvent):
-        res = await bot.send_group_msg(group_id=event.group_id, message=MessageSegment.image(img_url))
-        await msg_recall(res['message_id'])
+        res = await bot.send_group_msg(
+            group_id=event.group_id, message=MessageSegment.image(img_url)
+        )
+        await msg_recall(res["message_id"])
     else:
         await danbooru.finish(MessageSegment.image(img_url))
 
 
 @konachan.handle()
 async def konachan_handle(bot: Bot, event: Event, args: Message = CommandArg()):
-    url = 'https://konachan.com/post.json?tags='+str(args).strip()
+    url = "https://konachan.com/post.json?tags=" + str(args).strip()
     img_list = json.loads(await httpx_get(url))
-    img_url = choice(img_list)['file_url']
+    img_url = choice(img_list)["file_url"]
     if isinstance(event, GroupMessageEvent):
-        res = await bot.send_group_msg(group_id=event.group_id, message=MessageSegment.image(img_url))
-        await msg_recall(res['message_id'])
+        res = await bot.send_group_msg(
+            group_id=event.group_id, message=MessageSegment.image(img_url)
+        )
+        await msg_recall(res["message_id"])
     else:
         await konachan.finish(MessageSegment.image(img_url))

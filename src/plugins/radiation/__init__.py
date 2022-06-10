@@ -12,9 +12,10 @@ driver = get_driver()
 
 @driver.on_startup
 async def GetJson():
-    with open(path+'/data.json', 'r', encoding='UTF-8') as f:
+    with open(path + "/data.json", "r", encoding="UTF-8") as f:
         global data
         data = json.loads(f.read())
+
 
 radiation = on_message(rule=to_me(), priority=99)
 
