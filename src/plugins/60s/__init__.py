@@ -13,7 +13,7 @@ sixty = on_command("60s")
 @sixty.handle()
 async def _():
     img_url = get_60s()
-    sixty.finish(MessageSegment.image(img_url))
+    await sixty.finish(MessageSegment.image(img_url))
 
 
 plugin_config = Config.parse_obj(get_driver().config)
@@ -25,6 +25,6 @@ async def _():
     img_url = get_60s()
     bot = get_bot()
     for group in groups:
-        bot.send_group_msg(group_id=group, message=MessageSegment.image(img_url))
-        aiosleep(2)
+        await bot.send_group_msg(group_id=group, message=MessageSegment.image(img_url))
+        await aiosleep(2)
         raise FinishedException
