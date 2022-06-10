@@ -12,7 +12,7 @@ sixty = on_command("60s")
 
 @sixty.handle()
 async def _():
-    img_url = get_60s()
+    img_url = await get_60s()
     await sixty.finish(MessageSegment.image(img_url))
 
 
@@ -22,7 +22,7 @@ groups = plugin_config.sixty_subscribe_group
 
 @scheduler.scheduled_job("cron", hour="7")
 async def _():
-    img_url = get_60s()
+    img_url = await get_60s()
     bot = get_bot()
     for group in groups:
         await bot.send_group_msg(group_id=group, message=MessageSegment.image(img_url))
