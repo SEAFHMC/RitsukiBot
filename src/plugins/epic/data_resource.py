@@ -15,7 +15,7 @@ class epicgames:
     def __init__(self, game):
         self.title = game["title"]
         self.description = game["description"]
-        self.img = game["keyImages"][0]["url"]
+        self.img = game["keyImages"][-1]["url"]
         self.info = game["promotions"]["promotionalOffers"]
 
 
