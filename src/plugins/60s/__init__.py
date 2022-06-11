@@ -1,4 +1,4 @@
-from nonebot import on_command, get_bot, get_driver
+from nonebot import on_command, get_bot, get_driver, require
 from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot.exception import FinishedException
 from .data_source import get_60s
@@ -19,8 +19,10 @@ async def _():
 plugin_config = Config.parse_obj(get_driver().config)
 groups = plugin_config.sixty_subscribe_group
 
+scheduler = require("nonebot_plugin_apscheduler").scheduler
 
-@scheduler.scheduled_job("cron", hour="7")
+
+@scheduler.scheduled_job("cron", hour="8")
 async def _():
     img_url = await get_60s()
     bot = get_bot()
