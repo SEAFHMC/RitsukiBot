@@ -3,7 +3,6 @@ from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot.exception import FinishedException
 from .data_source import get_60s
 from .config import Config
-from nonebot_plugin_apscheduler import scheduler
 from asyncio import sleep as aiosleep
 
 
