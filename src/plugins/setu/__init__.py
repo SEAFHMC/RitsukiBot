@@ -1,10 +1,9 @@
-from nonebot.plugin import on_command, require
+from nonebot.plugin import on_command
 from nonebot.adapters.onebot.v11.message import MessageSegment, Message
 from nonebot.params import CommandArg
 from .get_setu import Setu
 from .anti_river_crab import enhanced_setu
 
-require("nonebot_plugin_imageutils")
 
 setu = on_command("setu", aliases={"涩图", "色图", "瑟图"})
 

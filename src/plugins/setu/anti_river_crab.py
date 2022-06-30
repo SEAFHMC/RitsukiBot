@@ -1,3 +1,7 @@
+from nonebot.plugin import require
+
+require("nonebot_plugin_imageutils")
+
 from utils.utils import open_img_from_url
 from nonebot_plugin_imageutils import Text2Image
 from PIL import Image
