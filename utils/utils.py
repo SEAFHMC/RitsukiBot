@@ -1,24 +1,8 @@
-import ujson as json
 import httpx
-from typing import List, Optional
+from typing import Optional
 
 
-def get_message_img(data: str) -> List[str]:
-    """
-    说明：
-        获取消息中所有的 图片 的链接
-    参数：
-        :param data: event.json()
-    """
-    try:
-        img_list = []
-        data = json.loads(data)
-        for msg in data["message"]:
-            if msg["type"] == "image":
-                img_list.append(msg["data"]["url"])
-        return img_list
-    except KeyError:
-        return []
+
 
 
 async def httpx_get(url: str) -> Optional[str]:
@@ -30,15 +14,3 @@ async def httpx_get(url: str) -> Optional[str]:
             return None
 
 
-def make_node(uin: int, name: str, content) -> dict:
-    node = {"type": "node", "data": {"uin": uin, "name": name, "content": content}}
-    return node
-
-
-def get_group_id(data: str) -> Optional[int]:
-    try:
-        jsons = json.loads(data)
-        group_id = jsons["group_id"]
-        return group_id
-    except Exception:
-        return None
