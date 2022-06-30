@@ -43,9 +43,9 @@ async def enhanced_setu(url: str, pid: int):
     ).to_image()
     text_pos = (img.width - text.width, img.height - text.height)
     fill = (
-        (randint(0, 50), randint(0, 50), randint(0, 50))
+        (255 - randint(0, 50), 255 - randint(0, 50), 255 - randint(0, 50))
         if is_dark(get_average_color(img, text_pos))
-        else (255 - randint(0, 50), 255 - randint(0, 50), 255 - randint(0, 50))
+        else (randint(0, 50), randint(0, 50), randint(0, 50))
     )
     text = Text2Image.from_text(
         text=f"Pixiv | {pid}", fontsize=font_size, fill=fill, fontname="FZSEJW"
