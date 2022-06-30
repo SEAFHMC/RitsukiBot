@@ -4,6 +4,7 @@ from PIL import Image
 from numpy import average
 from typing import Tuple
 from io import BytesIO
+from random import randint
 
 
 def get_average_color(image: Image.Image, pos: Tuple[int, int]):
@@ -37,7 +38,11 @@ async def enhanced_setu(url: str, pid: int):
         text=f"Pixiv | {pid}", fontsize=font_size, fontname="FZSEJW"
     ).to_image()
     text_pos = (img.width - text.width, img.height - text.height)
-    fill = "white" if is_dark(get_average_color(img, text_pos)) else "black"
+    fill = (
+        (randint(50), randint(50), randint(50))
+        if is_dark(get_average_color(img, text_pos))
+        else (255 - randint(50), 255 - randint(50), 255 - randint(50))
+    )
     text = Text2Image.from_text(
         text=f"Pixiv | {pid}", fontsize=font_size, fill=fill, fontname="FZSEJW"
     ).to_image()
