@@ -14,7 +14,9 @@ async def _(arg: Message = CommandArg()):
         data = await Setu.random_setu()
         if data.code == 200:
             await setu.finish(
-                MessageSegment.image(await enhanced_setu(url=data.img_url, pid=data.pid))
+                MessageSegment.image(
+                    await enhanced_setu(url=data.img_url, pid=data.pid)
+                )
             )
     data = await Setu.search_setu(tag=arg)
     if data.code == 200:
