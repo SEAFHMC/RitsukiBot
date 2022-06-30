@@ -11,8 +11,9 @@ def get_average_color(image: Image.Image, pos: Tuple[int, int]):
     R_list = []
     G_list = []
     B_list = []
-    for x in range(pos[0]):
-        for y in range(pos[1]):
+    width, height = image.size
+    for x in range(pos[0], width):
+        for y in range(pos[1], height):
             R_list.append(pix[x, y][0])
             G_list.append(pix[x, y][1])
             B_list.append(pix[x, y][2])
