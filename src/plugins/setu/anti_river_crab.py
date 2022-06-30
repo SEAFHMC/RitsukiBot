@@ -5,7 +5,7 @@ require("nonebot_plugin_imageutils")
 from utils.utils import open_img_from_url
 from nonebot_plugin_imageutils import Text2Image
 from PIL import Image
-from numpy import average
+from numpy import average, minimum
 from typing import Tuple
 from io import BytesIO
 from random import randint
@@ -37,7 +37,7 @@ def is_dark(color: Tuple[int, int, int]):
 async def enhanced_setu(url: str, pid: int):
     url = url.replace("https://i.pximg.net/", "http://127.0.0.1:17777/pixiv/")
     img = await open_img_from_url(url)
-    font_size = int(img.height / 32)
+    font_size = int(minimum(img.width, img.height) / 32)
     text = Text2Image.from_text(
         text=f"Pixiv | {pid}", fontsize=font_size, fontname="FZSEJW"
     ).to_image()

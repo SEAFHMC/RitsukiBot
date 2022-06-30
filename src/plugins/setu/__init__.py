@@ -18,8 +18,10 @@ async def _(arg: Message = CommandArg()):
                     await enhanced_setu(url=data.img_url, pid=data.pid)
                 )
             )
+        await setu.finish(data.message)
     data = await Setu.search_setu(tag=arg)
     if data.code == 200:
         await setu.finish(
             MessageSegment.image(await enhanced_setu(url=data.img_url, pid=data.pid))
         )
+    await setu.finish(data.message)
