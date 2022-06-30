@@ -33,11 +33,13 @@ async def enhanced_setu(url: str, pid: int):
     url = url.replace("https://i.pximg.net/", "http://127.0.0.1:17777/pixiv/")
     img = await open_img_from_url(url)
     font_size = int(img.height / 32)
-    text = Text2Image.from_text(text=f"Pixiv | {pid}", fontsize=font_size).to_image()
+    text = Text2Image.from_text(
+        text=f"Pixiv | {pid}", fontsize=font_size, fontname="FZSEJW"
+    ).to_image()
     text_pos = (img.width - text.width, img.height - text.height)
     fill = "white" if is_dark(get_average_color(img, text_pos)) else "black"
     text = Text2Image.from_text(
-        text=f"Pixiv | {pid}", fontsize=font_size, fill=fill
+        text=f"Pixiv | {pid}", fontsize=font_size, fill=fill, fontname="FZSEJW"
     ).to_image()
     img.alpha_composite(text, text_pos)
     buffer = BytesIO()
