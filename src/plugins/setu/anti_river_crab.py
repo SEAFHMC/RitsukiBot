@@ -52,5 +52,5 @@ async def enhanced_setu(url: str, pid: int):
     ).to_image()
     img.alpha_composite(text, text_pos)
     buffer = BytesIO()
-    img.save(buffer, "jpeg", mode="RGB")
+    img.convert("RGB").save(buffer, "jpeg")
     return buffer
