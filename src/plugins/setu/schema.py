@@ -11,4 +11,4 @@ class Data(BaseModel, extra=Extra.ignore):
 class SetuJson(BaseModel, extra=Extra.ignore):
     code: int
     message: str
-    data: List[Data]
+    data: Optional[List[Data]]
