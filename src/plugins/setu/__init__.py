@@ -1,27 +1,24 @@
-from nonebot.plugin import on_command
-from nonebot.adapters.onebot.v11.message import MessageSegment, Message
-from nonebot.params import CommandArg
+from nonebot.plugin import on_regex
+from nonebot.adapters.onebot.v11.message import MessageSegment
+from nonebot.adapters.onebot.v11.event import MessageEvent
+from nonebot.params import RegexGroup
 from .get_setu import Setu
 from .anti_river_crab import enhanced_setu
 
 
-setu = on_command("setu", aliases={"涩图", "色图", "瑟图"})
+setu = on_regex(r"来([0123456789]*)[份张]([rR]18)?(.*)的?[涩色瑟]图")
 
 
 @setu.handle()
-async def _(arg: Message = CommandArg()):
-    if not arg:
-        data = await Setu.random_setu()
-        if data.code == 200:
-            await setu.finish(
-                MessageSegment.image(
-                    await enhanced_setu(url=data.img_url, pid=data.pid)
-                )
-            )
-        await setu.finish(data.message)
-    data = await Setu.search_setu(tag=arg)
-    if data.code == 200:
-        await setu.finish(
-            MessageSegment.image(await enhanced_setu(url=data.img_url, pid=data.pid))
-        )
-    await setu.finish(data.message)
+async def _(event: MessageEvent, args=RegexGroup()):
+    number = args[0] or 1
+    tag = args[2] or '"'
+    if number > 10:
+        await setu.finish("最多10张哦")
+    resp = await Setu.get_setu(tag=tag, r18=0, number=number)
+    if resp.code == 200:
+        msg = MessageSegment.reply(user_id=event.message_id)
+        for i in resp.data:
+            msg += MessageSegment.image(await enhanced_setu(url=i.img_url, pid=i.pid))
+        await setu.finish(msg)
+    await setu.finish(resp.message)
