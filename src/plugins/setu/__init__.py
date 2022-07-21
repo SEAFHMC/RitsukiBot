@@ -17,7 +17,7 @@ async def _(event: MessageEvent, args=RegexGroup()):
         await setu.finish("最多10张哦")
     resp = await Setu.get_setu(tag=tag, r18=0, number=number)
     if resp.code == 200:
-        msg = MessageSegment.reply(id=event.message_id)
+        msg = MessageSegment.reply(event.message_id)
         for i in resp.data:
             msg += MessageSegment.image(await enhanced_setu(url=i.img_url, pid=i.pid))
         await setu.finish(msg)
