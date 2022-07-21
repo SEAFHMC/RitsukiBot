@@ -18,7 +18,10 @@ async def _(event: MessageEvent, args=RegexGroup()):
     resp = await Setu.get_setu(tag=tag, r18=0, number=number)
     if resp.code == 200:
         msg = MessageSegment.reply(event.message_id)
-        for i in resp.data:
-            msg += MessageSegment.image(await enhanced_setu(url=i.img_url, pid=i.pid))
+        try:
+            for i in resp.data:
+                msg += MessageSegment.image(await enhanced_setu(url=i.img_url, pid=i.pid))
+        except Exception:
+            pass
         await setu.finish(msg)
     await setu.finish(resp.message)
