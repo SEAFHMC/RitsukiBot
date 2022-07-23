@@ -26,8 +26,8 @@ async def _(bot: Bot, event: MessageEvent, args=RegexGroup()):
                     MessageSegment(
                         "node",
                         {
-                            "uin": bot.self_id,
-                            "name": "Bot",
+                            "uin": event.user_id,
+                            "name": event.sender.card or event.sender.nickname,
                             "content": MessageSegment.image(
                                 await enhanced_setu(url=i.img_url, pid=i.pid)
                             ),
