@@ -35,5 +35,6 @@ async def _(args=RegexGroup()):
                     await asleep(2)
                 except ActionFailed:
                     logger.warning("涩图被吞辣！")
+                    continue
             raise FinishedException
     await setu.finish(f"没有{tag}的涩图！")
