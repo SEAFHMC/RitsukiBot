@@ -26,8 +26,9 @@ async def _(args=RegexGroup()):
                 )
         except Exception:
             pass
-        for msg in msg_list:
-            await setu.send(msg)
-            await asleep(2)
-        raise FinishedException
-    await setu.finish(resp.message)
+        if msg_list:
+            for msg in msg_list:
+                await setu.send(msg)
+                await asleep(2)
+            raise FinishedException
+        await setu.finish(resp.message)
