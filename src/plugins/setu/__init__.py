@@ -1,7 +1,9 @@
+from nonebot.log import logger
 from nonebot.plugin import on_regex
 from nonebot.adapters.onebot.v11.message import MessageSegment
 from nonebot.exception import FinishedException
 from nonebot.params import RegexGroup
+from nonebot.exception import ActionFailed
 from .get_setu import Setu
 from .anti_river_crab import enhanced_setu
 from asyncio import sleep as asleep
@@ -28,7 +30,10 @@ async def _(args=RegexGroup()):
             pass
         if msg_list:
             for msg in msg_list:
-                await setu.send(msg)
-                await asleep(2)
+                try:
+                    await setu.send(msg)
+                    await asleep(2)
+                except ActionFailed:
+                    logger.warning("涩图被吞辣！")
             raise FinishedException
     await setu.finish(f"没有{tag}的涩图！")
