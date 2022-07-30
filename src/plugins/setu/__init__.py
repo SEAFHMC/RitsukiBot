@@ -31,4 +31,4 @@ async def _(args=RegexGroup()):
                 await setu.send(msg)
                 await asleep(2)
             raise FinishedException
-        await setu.finish(resp.message)
+        await setu.finish(f"没有{tag}的涩图！")
