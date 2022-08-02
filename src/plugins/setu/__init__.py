@@ -28,4 +28,5 @@ async def _(args=RegexGroup()):
             except Exception as e:
                 logger.warning(f"{type(e)}: {str(e)}")
                 continue
+        raise FinishedException
     await setu.finish(f"没有{tag}的涩图！")
