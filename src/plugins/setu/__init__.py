@@ -26,6 +26,6 @@ async def _(args=RegexGroup()):
                 await setu.send(MessageSegment.image(img))
                 await asleep(2)
             except Exception as e:
-                logger.info(str(e.with_traceback))
+                logger.warning(f"{type(e)}: {str(e)}")
                 continue
     await setu.finish(f"没有{tag}的涩图！")
