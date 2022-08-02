@@ -20,21 +20,15 @@ async def _(args=RegexGroup()):
         await setu.finish("最多10张哦")
     resp = await Setu.get_setu(tag=tag, r18=0, number=number)
     if resp.code == 200:
-        msg_list = []
-        try:
-            for i in resp.data:
-                msg_list.append(
+        for i in resp.data:
+            try:
+                await setu.send(
                     MessageSegment.image(await enhanced_setu(url=i.img_url, pid=i.pid))
                 )
-        except Exception:
-            pass
-        if msg_list:
-            for msg in msg_list:
-                try:
-                    await setu.send(msg)
-                    await asleep(2)
-                except ActionFailed:
-                    logger.warning("涩图被吞辣！")
-                    continue
-            raise FinishedException
+                await asleep(2)
+            except Exception as e:
+                logger.debug(str(e.with_traceback))
+                continue
+            finally:
+                raise FinishedException
     await setu.finish(f"没有{tag}的涩图！")
