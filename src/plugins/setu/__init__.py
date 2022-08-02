@@ -21,14 +21,11 @@ async def _(args=RegexGroup()):
     resp = await Setu.get_setu(tag=tag, r18=0, number=number)
     if resp.code == 200:
         for i in resp.data:
-            print(i.img_url)
             try:
-#                img = await enhanced_setu(url=i.img_url, pid=i.pid)
-                await setu.send(MessageSegment.image(i.img_url))
+                img = await enhanced_setu(url=i.img_url, pid=i.pid)
+                await setu.send(MessageSegment.image(img))
                 await asleep(2)
-#            except Exception as e:
-#                logger.debug(str(e.with_traceback))
-#                continue
-            finally:
-                raise FinishedException
+            except Exception as e:
+                logger.info(str(e.with_traceback))
+                continue
     await setu.finish(f"没有{tag}的涩图！")
