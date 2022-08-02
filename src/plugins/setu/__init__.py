@@ -22,7 +22,7 @@ async def _(args=RegexGroup()):
     if resp.code == 200:
         for i in resp.data:
             try:
-                img = await enhanced_setu(url=i.img_url, pid=i.pid)
+#                img = await enhanced_setu(url=i.img_url, pid=i.pid)
                 await setu.send(MessageSegment.image(i.img_url))
                 await asleep(2)
 #            except Exception as e:
