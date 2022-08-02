@@ -23,7 +23,7 @@ async def _(args=RegexGroup()):
         for i in resp.data:
             try:
                 img = await enhanced_setu(url=i.img_url, pid=i.pid)
-                await setu.send(MessageSegment.image(img))
+                await setu.send(MessageSegment.image(i.img_url))
                 await asleep(2)
 #            except Exception as e:
 #                logger.debug(str(e.with_traceback))
