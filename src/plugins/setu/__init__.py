@@ -3,7 +3,6 @@ from nonebot.plugin import on_regex
 from nonebot.adapters.onebot.v11.message import MessageSegment
 from nonebot.exception import FinishedException
 from nonebot.params import RegexGroup
-from nonebot.exception import ActionFailed
 from .get_setu import Setu
 from .anti_river_crab import enhanced_setu
 from asyncio import sleep as asleep
