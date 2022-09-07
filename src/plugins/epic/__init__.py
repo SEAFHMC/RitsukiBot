@@ -9,7 +9,7 @@ require("nonebot_plugin_apscheduler")
 from nonebot_plugin_apscheduler import scheduler
 
 
-@scheduler.scheduled_job("cron", hour="8", week="4", id="epic_free")
+@scheduler.scheduled_job("cron", hour="8", day_of_week="fri", id="epic_free")
 async def send_msg():
     (present, next) = await get_epic()
     for game in present:
@@ -18,6 +18,7 @@ async def send_msg():
         msg += MessageSegment.text(game.description)
         await epic.send(msg)
         await asleep(2)
+
     msg = MessageSegment.text(f"下周可白嫖{'和'.join([i.title for i in next])}")
     await asleep(2)
     await epic.finish(msg)
