@@ -19,9 +19,9 @@ def get_average_color(image: Image.Image, pos: Tuple[int, int]):
     width, height = image.size
     for x in range(pos[0], width):
         for y in range(pos[1], height):
-            R_list.append(pix[x, y][0])
-            G_list.append(pix[x, y][1])
-            B_list.append(pix[x, y][2])
+            R_list.append(pix[x, y][0])  # type: ignore
+            G_list.append(pix[x, y][1])  # type: ignore
+            B_list.append(pix[x, y][2])  # type: ignore
     R_average = int(average(R_list))
     G_average = int(average(G_list))
     B_average = int(average(B_list))
@@ -37,20 +37,20 @@ def is_dark(color: Tuple[int, int, int]):
 async def enhanced_setu(url: str, pid: int):
     url = url.replace("https://i.pximg.net/", "http://127.0.0.1:17777/pixiv/")
     img = await open_img_from_url(url)
-    font_size = int(minimum(img.width, img.height) / 32)
+    font_size = int(minimum(img.width, img.height) / 32)  # type: ignore
     text = Text2Image.from_text(
         text=f"Pixiv | {pid}", fontsize=font_size, fontname="FZSEJW"
     ).to_image()
-    text_pos = (img.width - text.width, img.height - text.height)
+    text_pos = (img.width - text.width, img.height - text.height)  # type: ignore
     fill = (
         (255 - randint(0, 50), 255 - randint(0, 50), 255 - randint(0, 50))
-        if is_dark(get_average_color(img, text_pos))
+        if is_dark(get_average_color(img, text_pos))  # type: ignore
         else (randint(0, 50), randint(0, 50), randint(0, 50))
     )
     text = Text2Image.from_text(
         text=f"Pixiv | {pid}", fontsize=font_size, fill=fill, fontname="FZSEJW"
     ).to_image()
-    img.alpha_composite(text, text_pos)
+    img.alpha_composite(text, text_pos)  # type: ignore
     buffer = BytesIO()
-    img.convert("RGB").save(buffer, "jpeg")
+    img.convert("RGB").save(buffer, "jpeg")  # type: ignore
     return buffer

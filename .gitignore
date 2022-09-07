@@ -143,3 +143,6 @@ poetry.lock
 
 # dev-plugins
 /dev_plugins
+
+# dlc
+/data

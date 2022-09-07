@@ -1,4 +1,5 @@
 from httpx import AsyncClient
+from nonebot.adapters.onebot.v11.message import MessageSegment
 from .schema import Model
 
 
@@ -13,3 +14,14 @@ async def get_epic():
     present = list(filter(lambda x: x.promotions.promotionalOffers, game_list))  # type: ignore
     next = list(filter(lambda x: x.promotions.upcomingPromotionalOffers, game_list))  # type: ignore
     return (present, next)
+
+
+async def make_msg():
+    (present, next) = await get_epic()
+    msg = []
+    for game in present:
+        msg += MessageSegment.text(f"即刻在Epic商城领取{game.title}\n")
+        msg += MessageSegment.image(game.keyImages[0].url)
+        msg += MessageSegment.text(f"\n{game.description}\n")
+    msg += MessageSegment.text(f"下周可白嫖{'和'.join([i.title for i in next])}")
+    return msg

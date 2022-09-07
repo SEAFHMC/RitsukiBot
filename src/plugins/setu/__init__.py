@@ -19,9 +19,9 @@ async def _(args=RegexGroup()):
         await setu.finish("最多10张哦")
     resp = await Setu.get_setu(tag=tag, r18=0, number=number)
     if resp.code == 200:
-        for i in resp.data:
+        for i in resp.data:  # type: ignore
             try:
-                img = await enhanced_setu(url=i.img_url, pid=i.pid)
+                img = await enhanced_setu(url=i.img_url, pid=i.pid)  # type: ignore
                 await setu.send(MessageSegment.image(img))
                 await asleep(2)
             except Exception as e:
