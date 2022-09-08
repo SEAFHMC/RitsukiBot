@@ -26,6 +26,7 @@ async def _(event: MessageEvent):
         plugin_config.add_group(group_id=event.group_id)
     else:
         plugin_config.add_user(user_id=event.user_id)
+    await epic_subscribe.finish("√")
 
 
 @epic_unsubscribe.handle()
@@ -35,6 +36,7 @@ async def _(event: MessageEvent):
         plugin_config.remove_group(group_id=event.group_id)
     else:
         plugin_config.remove_user(user_id=event.user_id)
+    await epic_subscribe.finish("√")
 
 
 @scheduler.scheduled_job("cron", hour="8", day_of_week="fri", id="epic_free")
