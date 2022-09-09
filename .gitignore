@@ -145,6 +145,3 @@ poetry.lock
 
 # dlc
 /data
-
-# bot condig
-/RitsukiBot/pyproject.toml
