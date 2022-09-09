@@ -140,8 +140,6 @@ dmypy.json
 # poetry
 poetry.lock
 
-# dev-plugins
-/dev_plugins
-
-# dlc
-/data
+# bot staff
+dev_plugins/
+data/
