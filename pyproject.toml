@@ -14,8 +14,6 @@ nb-cli = "^0.6.6"
 Pillow = "^9.2.0"
 numpy = "1.23.1"
 ujson = "^5.4.0"
-
-[tool.poetry.group.dev.dependencies]
 black = "^22.8.0"
 
 [tool.nonebot]
