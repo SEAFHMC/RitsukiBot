@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 from PIL import ImageDraw, ImageFont, Image
 
 
@@ -23,11 +23,11 @@ class Text2Image:
     @staticmethod
     def from_text(
         text: str,
-        font_path: str,
+        font_path: Union[str, Path],
         font_size: int = 12,
         width_limit: Optional[int] = None,
     ):
-        true_font = ImageFont.truetype(font=font_path, size=font_size)
+        true_font = ImageFont.truetype(font=str(font_path), size=font_size)
 
         def draw_text(text: str):
             (lt, lb, rt, rb) = true_font.getbbox(text)
@@ -50,6 +50,5 @@ class Text2Image:
                     text_list.append(tail[i:])
                     break
             if draw_text(text_list[-1]).width < width_limit:
-                print(text_list)
                 break
         return combine_img(*[draw_text(i) for i in text_list])
