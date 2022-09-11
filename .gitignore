@@ -143,3 +143,4 @@ poetry.lock
 # bot staff
 dev_plugins/
 data/
+.env.prod
