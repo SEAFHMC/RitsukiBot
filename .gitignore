@@ -144,3 +144,4 @@ poetry.lock
 dev_plugins/
 data/
 .env.prod
+RitsukiBot/pyproject.toml
