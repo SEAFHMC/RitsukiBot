@@ -15,8 +15,9 @@ Pillow = "^9.2.0"
 numpy = "1.23.1"
 ujson = "^5.4.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 black = "^22.8.0"
+peewee = "^3.15.2"
 
 [tool.nonebot]
 plugins = []
