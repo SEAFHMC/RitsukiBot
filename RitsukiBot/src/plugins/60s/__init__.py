@@ -1,6 +1,5 @@
 from nonebot import on_command, get_bot, get_driver, require
 from nonebot.adapters.onebot.v11 import MessageSegment
-from nonebot.exception import FinishedException
 from .data_source import get_60s
 from .config import Config
 from asyncio import sleep as aiosleep
@@ -28,4 +27,4 @@ async def _():
     for group in groups:
         await bot.send_group_msg(group_id=group, message=MessageSegment.image(img_url))  # type: ignore
         await aiosleep(2)
-        raise FinishedException
+        return

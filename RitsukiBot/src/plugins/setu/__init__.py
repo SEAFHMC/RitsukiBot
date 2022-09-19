@@ -1,7 +1,6 @@
 from nonebot.log import logger
 from nonebot.plugin import on_regex
 from nonebot.adapters.onebot.v11.message import MessageSegment
-from nonebot.exception import FinishedException
 from nonebot.params import RegexGroup
 from .get_setu import Setu
 from .anti_river_crab import enhanced_setu
@@ -27,5 +26,5 @@ async def _(args=RegexGroup()):
             except Exception as e:
                 logger.warning(f"{type(e)}: {str(e)}")
                 continue
-        raise FinishedException
+        return
     await setu.finish(f"没有{tag}的涩图！")
