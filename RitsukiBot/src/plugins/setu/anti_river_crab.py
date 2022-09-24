@@ -35,7 +35,7 @@ def is_dark(color: Tuple[int, int, int]):
 
 
 async def enhanced_setu(url: str, pid: int):
-    url = url.replace("https://i.pximg.net/", "https://i.pixiv.cat/")
+    url = url.replace("https://i.pximg.net/", "https://setu.ritsuki.top/")
     img = await open_img_from_url(url)
     font_size = int(minimum(img.width, img.height) / 32)  # type: ignore
     text = Text2Image.from_text(
