@@ -4,7 +4,7 @@ from nonebot.adapters.onebot.v11.message import MessageSegment
 from nonebot.params import RegexGroup
 from .get_setu import Setu
 from .anti_river_crab import enhanced_setu
-from asyncio import sleep as asleep
+from asyncio import sleep as async_sleep
 
 
 setu = on_regex(r"来([0123456789]*)[份张]([rR]18)?(.*)的?[涩色瑟]图")
@@ -22,7 +22,7 @@ async def _(args=RegexGroup()):
             try:
                 img = await enhanced_setu(url=i.img_url, pid=i.pid)  # type: ignore
                 await setu.send(MessageSegment.image(img))
-                await asleep(2)
+                await async_sleep(2)
             except Exception as e:
                 logger.warning(f"{type(e)}: {str(e)}")
                 continue

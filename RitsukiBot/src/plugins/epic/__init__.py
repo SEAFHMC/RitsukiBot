@@ -1,7 +1,7 @@
 from nonebot import require, get_bot
 from nonebot.plugin import on_command, on_regex
 from nonebot.adapters.onebot.v11.event import MessageEvent, GroupMessageEvent
-from asyncio import sleep as asleep
+from asyncio import sleep as async_sleep
 from .data_source import make_msg
 from .config import Config
 
@@ -46,8 +46,8 @@ async def _():
     plugin_config = Config().parse_config()
     for group_id in plugin_config.group:
         await bot.send_group_msg(group_id=group_id, message=msg)
-        await asleep(3)
+        await async_sleep(3)
     for user_id in plugin_config.user:
         await bot.send_private_msg(user_id=user_id, message=msg)
-        await asleep(3)
+        await async_sleep(3)
     return
