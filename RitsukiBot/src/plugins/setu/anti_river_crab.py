@@ -48,7 +48,10 @@ async def enhanced_setu(url: str, pid: int):
         else (randint(0, 50), randint(0, 50), randint(0, 50))
     )
     text = Text2Image.from_text(
-        text=f"Pixiv | {pid}", fontsize=font_size, fill=fill, fontname="Kazesawa-Regular"
+        text=f"Pixiv | {pid}",
+        fontsize=font_size,
+        fill=fill,
+        fontname="Kazesawa-Regular",
     ).to_image()
     img.alpha_composite(text, text_pos)  # type: ignore
     buffer = BytesIO()
