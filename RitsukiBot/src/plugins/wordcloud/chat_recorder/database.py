@@ -10,7 +10,7 @@ class Record(pw.Model):
     user_id = pw.IntegerField()
     group_id = pw.IntegerField()
     message = pw.CharField()
-    timestamp = pw.IntegerField()
+    date = pw.CharField()
 
     class Meta:
         database = db

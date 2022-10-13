@@ -15,6 +15,7 @@ Pillow = "^9.2.0"
 numpy = "1.23.1"
 ujson = "^5.4.0"
 peewee = "^3.15.3"
+wordcloud = "^1.8.2.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.8.0"
