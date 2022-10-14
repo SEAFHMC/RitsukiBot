@@ -19,17 +19,31 @@ async def _(event: GroupMessageEvent, message: str = EventPlainText()):
     )
 
 
-generate = on_command("生成今日词云", aliases={"生成词云"})
+today = on_command("生成今日词云", aliases={"今日词云"})
+yesterday = on_command("生成昨日词云", aliases={"昨日词云"})
 
 
-@generate.handle()
+@today.handle()
 async def _(event: GroupMessageEvent):
     if event.group_id in plugin_config.wordcloud_enable_group:
-        await generate.finish(
+        await today.finish(
             MessageSegment.image(
                 ChatRecorder.generate_wordcloud(
                     date=format_time(time()), group_id=event.group_id
                 )
             )
         )
-    await generate.finish("该群未启用词云")
+    await today.finish("该群未启用词云")
+
+
+@yesterday.handle()
+async def _(event: GroupMessageEvent):
+    if event.group_id in plugin_config.wordcloud_enable_group:
+        await yesterday.finish(
+            MessageSegment.image(
+                ChatRecorder.generate_wordcloud(
+                    date=format_time(time() - 24 * 3600), group_id=event.group_id
+                )
+            )
+        )
+    await yesterday.finish("该群未启用词云")
