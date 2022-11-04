@@ -4,7 +4,7 @@ from .schema import SetuJson
 
 
 class Setu:
-    base_url = "http://127.0.0.1:61658/setu"
+    base_url = "https://api.ritsuki.top/setu"
 
     @classmethod
     async def _quick_get(cls, url: str):
