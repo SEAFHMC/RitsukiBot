@@ -1,6 +1,7 @@
 from nonebot.plugin import on_message, on_command
 from nonebot.params import EventPlainText
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageSegment
+from nonebot.permission import SUPERUSER
 from time import time
 from .data_source import enable_group, format_time
 from .chat_recorder import ChatRecorder
@@ -21,6 +22,7 @@ async def _(event: GroupMessageEvent, message: str = EventPlainText()):
 
 today = on_command("生成今日词云", aliases={"今日词云"})
 yesterday = on_command("生成昨日词云", aliases={"昨日词云"})
+clear_record = on_command("清空词云记录", permission=SUPERUSER)
 
 
 @today.handle()
@@ -47,3 +49,8 @@ async def _(event: GroupMessageEvent):
             )
         )
     await yesterday.finish("该群未启用词云")
+
+
+@clear_record.handle()
+async def _(event: GroupMessageEvent):
+    pass
